@@ -1,5 +1,6 @@
 package com.andrew.study.config;
 
+import com.andrew.study.entity.Permission;
 import com.andrew.study.entity.User;
 import com.andrew.study.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -9,7 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * 定义用户信息服务
@@ -26,7 +30,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if (Objects.isNull(one)) {
             return null;
         }
-        return org.springframework.security.core.userdetails.User.builder().
-                username(one.getName()).password(one.getPassword()).authorities(one.getAuth()).build();
+        List<Permission> permissions = userService.findUserPermissions(one.getId());
+        UserDetails details = org.springframework.security.core.userdetails.User.builder()
+                .username(one.getName())
+                .password(one.getPassword())
+                .authorities(permissions.stream().map(Permission::getCode).toArray(String[]::new))
+                .build();
+        return details;
     }
 }

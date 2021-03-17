@@ -22,7 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/r/**").authenticated() // 所有从/r/**的接口都需要认证
+                .antMatchers("/user/r/r1").hasAuthority("p2")
+                .antMatchers("/user/r/**").authenticated() // 所有从/r/**的接口都需要认证
                 .anyRequest().permitAll() // 其他接口允许
                 .and()
                 .formLogin() // 允许表单登录

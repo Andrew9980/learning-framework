@@ -1,12 +1,16 @@
 package com.andrew.study.controller;
 
 
+import com.andrew.study.entity.Permission;
 import com.andrew.study.service.IUserService;
+import com.andrew.study.util.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -47,7 +51,17 @@ public class UserController {
         return "匿名";
     }
 
+    @GetMapping("/r/r2")
+    @PreAuthorize("hasAuthority('p2')")
+    public String r2() {
+        return getName() + " r2";
+    }
 
 
+
+    @GetMapping("/permission/{userId}")
+    public ResponseEntity permissions(@PathVariable("userId") Integer userId) {
+        return new ResponseEntity(userService.findUserPermissions(userId));
+    }
 }
 
