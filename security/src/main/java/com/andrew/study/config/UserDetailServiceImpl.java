@@ -1,0 +1,32 @@
+package com.andrew.study.config;
+
+import com.andrew.study.entity.User;
+import com.andrew.study.service.IUserService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import java.util.Objects;
+
+/**
+ * 定义用户信息服务
+ */
+@Configuration
+public class UserDetailServiceImpl implements UserDetailsService {
+
+    @Autowired
+    private IUserService userService;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User one = userService.getOne(new QueryWrapper<User>().eq("name", "andrew"));
+        if (Objects.isNull(one)) {
+            return null;
+        }
+        return org.springframework.security.core.userdetails.User.builder().
+                username(one.getName()).password(one.getPassword()).authorities(one.getAuth()).build();
+    }
+}
