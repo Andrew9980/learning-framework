@@ -18,5 +18,7 @@ public interface IUserService extends IService<User> {
 
     List<Permission> findUserPermissions(Integer userId);
 
+    boolean updateByName(String name);
+
 
 }

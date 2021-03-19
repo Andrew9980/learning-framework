@@ -63,5 +63,10 @@ public class UserController {
     public ResponseEntity permissions(@PathVariable("userId") Integer userId) {
         return new ResponseEntity(userService.findUserPermissions(userId));
     }
+
+    @GetMapping("/update/{name}")
+    public ResponseEntity updateByName(@PathVariable String name) {
+        return new ResponseEntity(userService.updateByName(name));
+    }
 }
 

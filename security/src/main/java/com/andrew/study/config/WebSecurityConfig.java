@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-@EnableWebSecurity
+//@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -21,13 +21,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                .antMatchers("/user/r/r1").hasAuthority("p2")
-                .antMatchers("/user/r/**").authenticated() // 所有从/r/**的接口都需要认证
-                .anyRequest().permitAll() // 其他接口允许
-                .and()
-                .formLogin() // 允许表单登录
-                .successForwardUrl("/user/login-success") // 登录成功后跳转接口
-                .permitAll();
+        httpSecurity.authorizeRequests().anyRequest().permitAll();
+//        httpSecurity.authorizeRequests()
+//                .antMatchers("/user/r/r1").hasAuthority("p2")
+//                .antMatchers("/user/r/**").authenticated() // 所有从/r/**的接口都需要认证
+//                .anyRequest().permitAll() // 其他接口允许
+//                .and()
+//                .formLogin() // 允许表单登录
+//                .successForwardUrl("/user/login-success") // 登录成功后跳转接口
+//                .permitAll();
     }
 }

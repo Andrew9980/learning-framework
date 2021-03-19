@@ -46,13 +46,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public List<Permission> findUserPermissions(Integer userId) {
 
-        Wrappers.<Permission>lambdaQuery().getSqlSet();
-
         List<UserRole> userRoles = userRoleService.lambdaQuery().select(UserRole::getRoleId).eq(UserRole::getUserId, userId).list();
         List<Integer> roleIds = userRoles.stream().map(UserRole::getRoleId).collect(Collectors.toList());
         List<RolePermission> permissions = rolePermissionService.lambdaQuery().select(RolePermission::getPermissionId).in(RolePermission::getRoleId, roleIds).list();
         List<Integer> permissionIds = permissions.stream().map(RolePermission::getPermissionId).collect(Collectors.toList());
         List<Permission> list = permissionService.lambdaQuery().in(Permission::getId, permissionIds).list();
+
+
+
+
         return list;
+    }
+
+    @Override
+    public boolean updateByName(String name) {
+        User user = new User();
+        user.setName(name);
+        user.setAuth("p2");
+        return update(user, new QueryWrapper<User>().eq("name", name));
     }
 }
