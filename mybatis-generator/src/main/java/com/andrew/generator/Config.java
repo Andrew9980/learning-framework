@@ -22,7 +22,7 @@ public class Config {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String projectPath = "/Users/andrew/Documents/notes/learning-framework/security";
+        String projectPath = "C:\\Users\\Andrew\\Documents\\notes\\learning-framework\\order-center8002";
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("andrew");
         gc.setOpen(false);
@@ -32,7 +32,7 @@ public class Config {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/study?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://192.168.123.122:3306/study?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
@@ -43,7 +43,7 @@ public class Config {
         // 包配置
         PackageConfig pc = new PackageConfig();
 //        pc.setModuleName("security");
-        pc.setParent("com.andrew.study");
+        pc.setParent("com.andrew.cloud");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -111,7 +111,7 @@ public class Config {
 //        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
-        strategy.setInclude("role,user_role,permission,role_permission".split(",")); // 表名
+        strategy.setInclude("t_order"); // 表名
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

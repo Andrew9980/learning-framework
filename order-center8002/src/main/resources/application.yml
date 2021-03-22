@@ -1,0 +1,27 @@
+server:
+  port: 8002
+
+spring:
+  application:
+    name: order-center-service
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.123.122:3306/study?useUnicode=true&useSSL=false&characterEncoding=utf8
+    driver-class-name: com.mysql.jdbc.Driver
+
+eureka:
+  instance:
+    instance-id: order-service8002
+    prefer-ip-address: true
+  client:
+    # 是否从eureka server 抓取已有的注册信息 设置为true 才能配置ribbon负载均衡
+    fetch-registry: true
+    # 注册到注册中心
+    register-with-eureka: true
+    service-url: # 注册中心地址
+      defaultZone: http://eureka1:7001/eureka,http://eureka2:7002/eureka
+
+feign:
+  hystrix:
+    enabled: true
