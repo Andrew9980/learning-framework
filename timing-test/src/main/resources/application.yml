@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:mysql://rds7r40uo8u5s5xy0y9p0public.mysql.rds.aliyuncs.com:3306/timing?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: keluadmin
+    password: rt7b58y0
+    driver-class-name: com.mysql.jdbc.Driver

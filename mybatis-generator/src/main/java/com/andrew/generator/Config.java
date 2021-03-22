@@ -22,7 +22,7 @@ public class Config {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String projectPath = "C:\\Users\\Andrew\\Documents\\notes\\learning-framework\\order-center8002";
+        String projectPath = "/Users/andrew/Documents/notes/learning-framework/timing-test";
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("andrew");
         gc.setOpen(false);
@@ -32,18 +32,18 @@ public class Config {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://192.168.123.122:3306/study?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://rds7r40uo8u5s5xy0y9p0public.mysql.rds.aliyuncs.com:3306/timing?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("root");
+        dsc.setUsername("keluadmin");
+        dsc.setPassword("rt7b58y0");
 
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
 //        pc.setModuleName("security");
-        pc.setParent("com.andrew.cloud");
+        pc.setParent("com.andrew.timing");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -111,7 +111,7 @@ public class Config {
 //        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
-        strategy.setInclude("t_order"); // 表名
+        strategy.setInclude("t_user,t_learning_feed,t_user_follow".split(",")); // 表名
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
