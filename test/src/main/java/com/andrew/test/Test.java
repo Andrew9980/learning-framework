@@ -1,20 +1,18 @@
 package com.andrew.test;
 
-import cn.hutool.core.map.MapBuilder;
-import cn.hutool.core.map.MapUtil;
-import org.apache.commons.beanutils.BeanMap;
-
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class Test {
 
     public static void main(String[] args) {
+        User user1 = User.builder().age(14).name("abc").build();
+        User user2 = User.builder().age(15).name("bcd").build();
+        User user3 = User.builder().age(16).name("efg").build();
+        User user4 = User.builder().age(17).name("hij").build();
 
-
-        BeanMap beanMap = new BeanMap(MapUtil.builder().put("name", "Andrew").build());
-        Object name = beanMap.get("name");
-        System.out.println(name);
+        List<User> userList = List.of(user1, user2, user3, user4);
 
     }
-
 }
